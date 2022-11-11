@@ -1,0 +1,33 @@
+<section class="vh-100" style="background-color: #508bfc;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+
+                        <h3 class="mb-5">Sign in</h3>
+                        <div *ngIf="!completeInput">
+                            <p style="color: red;"><em>Please Fill The Required Fields</em></p>
+                        </div>
+
+                        <div *ngIf="!valid">
+                            <p style="color: red;"><em>Wrong Credentials</em></p>
+                        </div>
+                        <div class="form-outline mb-4 mb-2 mr-sm-2">
+                            <input type="UserName" id="typeEmailX-2" class="form-control form-control-lg" placeholder="@UserName" [(ngModel)]='admin.userName' />
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="password" id="typePasswordX-2" class="form-control form-control-lg" placeholder="Password" [(ngModel)]='admin.password' />
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="onSubmit()">Sign In</button>
+                        <div>
+                            <p style="margin-top: 20px;">Or</p>
+                            <a href="#" class="link-primary" [routerLink]="['/Signup']"> Create Account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

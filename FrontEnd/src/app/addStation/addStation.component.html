@@ -1,0 +1,20 @@
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+
+                    <h3 class="mb-5">Add New Station</h3>
+                    <div *ngIf="!valid">
+                        <p style="color: red;"><em>Please Enter A valid Name </em></p>
+                    </div>
+                    <div class="form-outline mb-4 mb-2 mr-sm-2">
+                        <input type="UserName" id="form3Example1c" class="form-control form-control-lg" placeholder="Station Name" [(ngModel)]='station.stationName' />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Add Station</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
