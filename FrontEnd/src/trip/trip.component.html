@@ -1,0 +1,58 @@
+<div class="container bg-light text-dark rounded" style="opacity: 1; margin-top: 50px;">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Trip Id</th>
+                <th scope="col">To Station</th>
+                <th scope="col">From Station</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">Arrival Time</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let trip of trips; let i=index">
+                <td>{{trip.id}}</td>
+                <td>
+                    <p *ngIf="!editables[i]">{{trip.toStation.stationName}}</p>
+                    <select *ngIf="editables[i]" class="form-select" aria-label="Default select example" (change)="onSelectToStation(trip,$event)">
+                        <option selected>From Station</option>
+                        <option *ngFor="let station of stations let i=index; " [value]="i" >
+                              {{station.stationId}}-{{station.stationName}}
+                        </option>
+
+                      </select>
+
+                </td>
+                <td>
+                    <p *ngIf="!editables[i]">{{trip.fromStation.stationName}}</p>
+                    <select *ngIf="editables[i]" class="form-select" aria-label="Default select example" (change)="onSelectFromStation(trip,$event)">
+                        <option selected>To Station</option>
+                        <option *ngFor="let station of stations let i=index; " [value]="i" >
+                              {{station.stationId}}-{{station.stationName}}
+                        </option>
+
+                      </select>
+                </td>
+                <td>
+                    <p *ngIf="!editables[i]">{{trip.startTime}}</p>
+                    <input style="word-wrap:break-word;" *ngIf="editables[i]" type="datetime-local" id="form3Example1c " class="form-control " placeholder="Start Time " [(ngModel)]='trip.startTime' [ngModelOptions]="{standalone: true} " />
+
+                </td>
+                <td>
+                    <p *ngIf="!editables[i]">{{trip.endTime}}</p>
+                    <input *ngIf="editables[i]" type="datetime-local" id="form3Example1c " class="form-control " placeholder="Arrival Time " [(ngModel)]='trip.endTime' [ngModelOptions]="{standalone: true} " />
+                </td>
+                <td>
+                    <button class="btn btn-primary" *ngIf="!editables[i]" (click)="makeEditable(trip)">Edit</button>
+                    <button class="btn btn-primary" *ngIf="editables[i]" (click)="updateTrip(trip)">Save</button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" (click)="deleteTrip(trip)" [disabled]="disableDelete">Delete</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>

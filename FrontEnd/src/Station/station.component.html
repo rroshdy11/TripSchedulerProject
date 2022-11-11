@@ -1,0 +1,29 @@
+<div class="container bg-light text-dark rounded" style=" margin-top: 50px; ">
+    <table class="table ">
+        <thead class="thead-dark ">
+            <tr>
+                <th>Station Id</th>
+                <th>Station Name</th>
+                <th>Delete Controller</th>
+                <th>Edit Controller</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let station of stations; let i=index ">
+                <th>{{station.stationId}}</th>
+                <td>
+                    <p *ngIf="!editables[i] "> {{station.stationName}}</p>
+                    <input type="text " *ngIf="editables[i] " [(ngModel)]="station.stationName " />
+                </td>
+                <td>
+                    <button class="btn btn-danger " (click)="deleteStation(station) " [disabled]="!disableDelete ">Delete</button>
+                </td>
+                <td>
+                    <button class="btn btn-primary " *ngIf="!editables[i] " (click)="makeEditable(station) ">Edit</button>
+                    <button class="btn btn-primary " *ngIf="editables[i] " (click)=" updateStation(station) ">Save</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
