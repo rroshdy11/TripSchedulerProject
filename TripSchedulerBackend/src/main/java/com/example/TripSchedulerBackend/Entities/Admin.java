@@ -17,6 +17,22 @@ public class Admin {
     @NotNull
     private String password;
 
+    public Admin(String userName, String password, String email) {
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    private String email;
+
 
     public Admin() {
     }

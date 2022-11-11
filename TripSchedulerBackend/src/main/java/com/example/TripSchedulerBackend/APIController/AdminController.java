@@ -5,7 +5,10 @@ import com.example.TripSchedulerBackend.Entities.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path="api/admin")
 public class AdminController {
     AdminServices adminServices;
@@ -24,6 +27,11 @@ public class AdminController {
     @PostMapping(path = "/signin")
     public Boolean Signin(@RequestBody Admin admin){
         return  adminServices.ValidateAdmin(admin);
+    }
+
+    @GetMapping(path = "/showAllAdmins")
+    public List<Admin> getAllAdmins(){
+        return  adminServices.getAllAdmins();
     }
 
 }

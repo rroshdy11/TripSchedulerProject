@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path="api/admin/trip")
 public class TripController {
     TripServices tripServices;
@@ -26,8 +27,8 @@ public class TripController {
     }
     @PutMapping(path = "updateTrip/{tripId}")
     public Trip updateTrip(@PathVariable Long tripId,
-                           @RequestParam(required = false) String toStation,
-                           @RequestParam(required = false) String fromStation,
+                           @RequestParam(required = false) Long toStation,
+                           @RequestParam(required = false) Long fromStation,
                            @RequestParam(required = false)String startTime,
                            @RequestParam(required = false)String endTime
     ){

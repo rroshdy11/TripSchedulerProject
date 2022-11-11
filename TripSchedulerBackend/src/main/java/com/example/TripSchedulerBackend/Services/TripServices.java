@@ -71,31 +71,31 @@ public class TripServices {
         return  AllTrips;
     }
     @Transactional
-    public Trip UpdateTripById(Long Id,String toStation,String fromStation,String startTime,String endTime ){
+    public Trip UpdateTripById(Long Id,Long toStation,Long fromStation,String startTime,String endTime ){
         Trip trip=tripRepository.findById(Id).orElseThrow(
                 () -> new IllegalStateException("The Trip with Id "+Id+" Not Exist")
         );
         if(toStation!=null
-                &&stationServices.getStationByName(toStation)!=null
-                &&stationServices.getStationByName(toStation)!=trip.getToStation()
+                &&stationServices.getStationById(toStation)!=null
+                &&stationServices.getStationById(toStation)!=trip.getToStation()
         ){
             //delete the trip from the list of the old station
             Station oldStation=trip.getToStation();
             stationServices.removeTripFromStationsById(oldStation.getStationId(),trip,null);
             //append to the new station
-            Station newstation =stationServices.getStationByName(toStation);
+            Station newstation =stationServices.getStationById(toStation);
             trip.setToStation(newstation);
             stationServices.UpdateStationsById(newstation.getStationId(),null,trip,null);
         }
         if(fromStation!=null
-                &&stationServices.getStationByName(fromStation)!=null
-                &&stationServices.getStationByName(fromStation)!=trip.getToStation()
+                &&stationServices.getStationById(fromStation)!=null
+                &&stationServices.getStationById(fromStation)!=trip.getToStation()
         ){
             //delete the trip from the list of the old station
             Station oldStation=trip.getFromStation();
             stationServices.removeTripFromStationsById(oldStation.getStationId(),null,trip);
             //append to the new station
-            Station newstation =stationServices.getStationByName(fromStation);
+            Station newstation =stationServices.getStationById(fromStation);
             trip.setFromStation(newstation);
             stationServices.UpdateStationsById(newstation.getStationId(),null,null,trip);
         }

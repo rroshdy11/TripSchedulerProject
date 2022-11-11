@@ -36,6 +36,13 @@ public class StationServices {
         stationRepository.deleteById(stationId);
     }
 
+    //find station by id
+    public Station getStationById(Long stationId){
+        return stationRepository.findById(stationId).
+                orElseThrow(()->new IllegalStateException("Station with id "+stationId+" does not exist"));
+    }
+
+
     //To Make Entity Go to Manage State So we Can Change What we want by its Setters
     @Transactional
     public Station UpdateStationsById(Long stationId, String stationName, Trip totrip, Trip fromtrip) {

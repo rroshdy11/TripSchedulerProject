@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path="api/admin/station")
 public class StationController {
     StationServices stationServices;
@@ -21,10 +22,7 @@ public class StationController {
         return stationServices.CreateStation(station) ;
     }
 
-    @GetMapping(path = "/showAllStations/{stationName}")
-    public List<Station> showAllStationsByName(@PathVariable String stationName){
-        return stationServices.getAllStationsByName(stationName) ;
-    }
+
     @DeleteMapping(path = "/deleteStation/{stationId}")
     public void deleteStation(@PathVariable Long stationId){
          stationServices.deleteStationsById(stationId); ;
