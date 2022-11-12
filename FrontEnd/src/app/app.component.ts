@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Access } from './AuthService/Access';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TripSchedulerFrontend';
+  constructor(){
+    Access.isNextStep=false;
+  }
+    
 }

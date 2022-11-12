@@ -1,0 +1,45 @@
+<section class="vh-100" style="background-color: #508bfc;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <form class="card-body p-5 text-center">
+
+                        <h3 class="mb-5">Make a new Trip</h3>
+                        <div *ngIf="!valid">
+                            <p style="color: red;"><em>Please Provide Valid Details</em></p>
+                        </div>
+
+                        <div class="form-outline mb-4 mb-2 mr-sm-2">
+                            <select class="form-select" aria-label="Default select example" (change)="onSelectFromStation($event)">
+                                <option selected>From Station</option>
+                                <option *ngFor="let station of stations let i=index; " [value]="i" >
+                                      {{station.stationId}}-{{station.stationName}}
+                                </option>
+
+                              </select>
+
+                        </div>
+                        <div class="form-outline mb-4 mb-2 mr-sm-2">
+                            <select class="form-select" aria-label="Default select example" required (change)="onSelectToStation($event)">
+                                <option selected>To Station</option>
+                                <option    *ngFor=" let station of stations; let i=index; " [value]="i">
+                                      {{station.stationId}}-{{station.stationName}}
+                                </option> 
+
+                              </select>
+                        </div>
+                        <div class="form-outline mb-4 mb-2 mr-sm-2 ">
+                            <input type="datetime-local" id="form3Example1c " class="form-control form-control-lg " placeholder="Start Time " [(ngModel)]='trip.startTime' [ngModelOptions]="{standalone: true} " />
+                        </div>
+                        <div class="form-outline mb-4 mb-2 mr-sm-2 ">
+                            <input type="datetime-local" id="form3Example1c " class="form-control form-control-lg " placeholder="Arrival Time " [(ngModel)]='trip.endTime' [ngModelOptions]="{standalone: true} " />
+                        </div>
+
+                        <button type="submit " class="btn btn-primary btn-lg btn-block " (click)="addTrip()">Save Trip</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { AdminService } from '../AdminService/admin.service';
+import { Access } from '../AuthService/Access';
 
 import { Admin } from './Admin';
 
@@ -10,7 +11,9 @@ import { Admin } from './Admin';
   styleUrls: ['./signin.component.css'],
 
 })
-export class SignInPage {
+export class SignInPage implements CanActivate{
+  isSignIn:boolean=false;
+
   errorMsg:string='';
    constructor(private adminService: AdminService,private router: Router){}
   admin:Admin={
@@ -19,6 +22,16 @@ export class SignInPage {
     email:'',
     adminId:0
   };
+  canActivate():boolean{
+    if(this.isSignIn){
+      return true;
+    }
+    else{
+      this.router.navigate(['HomePage']);
+      return false;
+    }
+  }
+
   completeInput:boolean=true;
   valid:boolean=true;
   onSubmit():void{
@@ -31,6 +44,8 @@ export class SignInPage {
       this.adminService.SignIn(this.admin).subscribe(
         {
           next:valid=>{
+            Access.isNextStep=valid;
+            this.isSignIn=valid;
             this.valid=valid;
             if(valid){
               this.router.navigate(['/MainPage/Stations']);
