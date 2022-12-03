@@ -1,13 +1,14 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Station } from '../Station/Station';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StationService {
-  private StationUrl='http://localhost:8080/api/admin/station';
+  private StationUrl=environment.apiUrl+'/api/admin/station';
 
   constructor(private http:HttpClient){}
 

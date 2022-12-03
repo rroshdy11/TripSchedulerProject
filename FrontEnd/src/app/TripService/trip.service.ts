@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Trip } from '../trip/Trip';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { Trip } from '../trip/Trip';
 })
 export class TripService {
 
-  private TripUrl='http://localhost:8080/api/admin/trip';
+  private TripUrl=environment.apiUrl+'/api/admin/trip';
   constructor(private http:HttpClient ){}
 
   getTrips():Observable<Trip[]>{

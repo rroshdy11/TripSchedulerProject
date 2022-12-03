@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Admin } from '../SignIn/Admin';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Admin } from '../SignIn/Admin';
 export class AdminService {
 
   
-  private AdminUrl='http://localhost:8080/api/admin';
+  private AdminUrl=environment.apiUrl+'/api/admin';
   constructor(private http:HttpClient ){}
 
   SignIn(admin :Admin):Observable<boolean>{
