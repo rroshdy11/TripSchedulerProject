@@ -1,0 +1,47 @@
+# This file is used to deploy the backend service to the cluster
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend-deployment # This is the label of the deployment
+spec:
+  selector:
+    matchLabels:
+      app: spring-boot-backend # This is the label of the deployment where the pod will be deployed
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: spring-boot-backend
+    spec:
+      containers:
+        - name: spring-boot-container
+          image: redaroshdy/backendimage:latest
+          env:
+            - name: PORT
+              value: "8080"
+            - name: DB_URL
+              value: mysql-service #this is the name of the service that we created earlier 
+            - name: DB_USER
+              value: root
+            - name: DB_PASSWORD
+              value: root
+          ports:
+            - containerPort: 8080
+---
+# expose the backend service to the outside world
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  labels:
+    app: backend-service
+spec:
+  selector:
+    app: spring-boot-backend
+  ports:
+    - protocol: TCP
+      port: 8080 # This is the port that the service will listen on inside the cluster
+      targetPort: 8080 # This is the port that the service will be exposed on outside the cluster
+  type: NodePort
